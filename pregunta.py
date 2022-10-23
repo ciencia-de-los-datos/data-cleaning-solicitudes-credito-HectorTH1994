@@ -45,19 +45,18 @@ def clean_data():
 
     #linea de credito
     df.línea_credito=df.línea_credito.str.replace('-',' ')
-    df.línea_credito=df.línea_credito.str.replace('_',' ')
-    df.línea_credito=df.línea_credito.str.replace('.','')
+    df.línea_credito=df.línea_credito.str.replace(' ','_')
     df.línea_credito=df.línea_credito.str.lower()
-    df.línea_credito=df.línea_credito.str.strip()
+
 
     #fecha
     df.fecha_de_beneficio = pd.to_datetime(df.fecha_de_beneficio, dayfirst=True)
     #print(df.monto_del_credito.value_counts())
     #Monto de credito
-    df.monto_del_credito=df.monto_del_credito.str.replace(',','.')
-    df.monto_del_credito=df.monto_del_credito.str.replace('$','')
+    df.monto_del_credito = (df.monto_del_credito.str.replace('[^\d.]+', '', regex=True))
     df.monto_del_credito=df.monto_del_credito.str.strip()
     df.monto_del_credito=df.monto_del_credito.apply(pd.to_numeric, downcast='integer', errors='ignore')
+
     #print(df[df.estrato==0])
     df.drop_duplicates(inplace=True)
     df.dropna(inplace=True)
@@ -67,4 +66,4 @@ def clean_data():
 
     return df
     
-print(clean_data().tipo_de_emprendimiento.value_counts().to_list())
+print(clean_data().sexo.value_counts().to_list())
