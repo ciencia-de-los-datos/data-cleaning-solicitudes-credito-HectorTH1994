@@ -37,11 +37,11 @@ def clean_data():
     df.idea_negocio=df.idea_negocio.str.strip()
 
     #Barrio
-    df.barrio=df.barrio.str.replace('-',' ')
-    df.barrio=df.barrio.str.replace('_',' ')
-    df.barrio=df.barrio.str.replace('.',' ')
+    df.barrio=df.barrio.str.replace('-','_')
+    df.barrio=df.barrio.str.replace(' ','_')
+    #df.barrio=df.barrio.str.replace('.',' ')
     df.barrio=df.barrio.str.lower()
-    df.barrio=df.barrio.str.strip()
+    #df.barrio=df.barrio.str.strip()
 
     #linea de credito
     df.línea_credito=df.línea_credito.str.replace('-',' ')
@@ -60,10 +60,8 @@ def clean_data():
     #print(df[df.estrato==0])
     df.drop_duplicates(inplace=True)
     df.dropna(inplace=True)
-    
-    print(df.estrato.value_counts())
-
 
     return df
     
-print(clean_data().sexo.value_counts().to_list())
+print(clean_data().barrio.value_counts().to_list())
+
