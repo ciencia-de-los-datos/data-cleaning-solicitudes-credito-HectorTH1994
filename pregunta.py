@@ -19,8 +19,8 @@ def clean_data():
     #
 
     df=df[df.columns[1:]]
-    #df.drop_duplicates(inplace=True)
-    #df.dropna(inplace=True)
+    df.drop_duplicates(inplace=True)
+    df.dropna(inplace=True)
     
     #Colocamos sexo en minusculas y eliminamos espacios en blanco
     df.sexo=df.sexo.str.lower()
@@ -63,9 +63,8 @@ def clean_data():
     df.dropna(inplace=True)
     
     print(df.estrato.value_counts())
-    #print(df.comuna_ciudadano.value_counts())
-    #print(df.sexo.value_counts().to_list())
+
 
     return df
     
-    print(clean_data().sexo.value_counts().to_list())
+print(clean_data().tipo_de_emprendimiento.value_counts().to_list())
